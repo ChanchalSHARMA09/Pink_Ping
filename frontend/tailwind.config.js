@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./src/**/*.{html,js}"],    //this content is changed from the content given in documentation of tailwind css.
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx}", 
+  ],
   theme: {
     extend: {},
   },
   plugins: [],
 }
-
