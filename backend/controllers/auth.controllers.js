@@ -1,10 +1,13 @@
+//in this file we basically making logic for signup ,signin, logout
+
+
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import genToken from "../config/token.js";
 
 
 
-
+//for signup
 export const signUp= async(req,res)=>{
     try{
         const {userName,email,password}=req.body;
@@ -46,6 +49,10 @@ export const signUp= async(req,res)=>{
     }
 };
 
+
+
+
+//for login
 export const signIn= async(req,res)=>{
     try{
         const {email,password}=req.body;
@@ -74,7 +81,7 @@ export const signIn= async(req,res)=>{
             secure:false,
         });
         
-        res.status(200).json(user);
+        res.status(200).json({message:"user loggined"});
       
 
     }catch(error){
@@ -82,6 +89,8 @@ export const signIn= async(req,res)=>{
     }
 };
 
+
+//for logout
 export const logOut=async(req,res)=>{
     try{
         res.clearCookie("token");

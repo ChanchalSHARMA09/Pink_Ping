@@ -1,3 +1,5 @@
+//in this file we making token for user login/signup.
+
 import jwt  from "jsonwebtoken"
 
 const genToken=async(userId)=>{

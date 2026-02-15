@@ -1,3 +1,5 @@
+//In this File we are connecting the mongoose/mongoDb to project.
+
 import mongoose from "mongoose";
 
 const connectDb= async()=>{

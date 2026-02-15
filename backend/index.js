@@ -1,3 +1,5 @@
+//entry point file.
+
 import express from "express";
 import dotenv from "dotenv";
 import connectDb from "./config/db.js";

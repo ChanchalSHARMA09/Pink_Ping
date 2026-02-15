@@ -1,3 +1,7 @@
+# in this file we add those files which we dont want to push on github.
+
+
+
 node_modules/
 .env
 backend/node_modules/
