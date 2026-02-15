@@ -12,13 +12,13 @@ function Login() {
          <h1 className="text-gray-600 font-bold text-[30px] text-center">Login to <span className="text-white">PinkPing</span>...</h1>
         </div>
    <form className="w-full flex flex-col gap-[20px] items-center">
-        <input type="email" placeholder='email' className="w-[90%] h-[50px] border-2 border-[#E2A3B7] px-[20px] py-[10px] bg-white rounded-lg shadow-lg shadow-gray-200"/>
-            <div className="w-[90%] h-[50px] border-2 border-[#E2A3B7] overflow-hidden rounded-lg shadow-lg shadow-gray-200 relative"> 
-               <input type={show?"text":"password"} placeholder='Password' className="w-full h-full  px-[20px] py-[10px] bg-white  "/>
+        <input type="email" placeholder='email' className="w-[90%] h-[50px] outline-none border-2 border-[#E2A3B7] px-[20px] py-[10px] bg-white rounded-lg shadow-lg shadow-gray-200  text-gray-700 text-[19px]"/>
+            <div className="w-[90%] h-[50px] outline-none border-2 border-[#E2A3B7] overflow-hidden rounded-lg shadow-lg shadow-gray-200 relative  text-gray-700 text-[19px]"> 
+               <input type={show?"text":"password"} placeholder='password' className="w-full h-full  px-[20px] py-[10px] bg-white  "/>
                <span className="absolute top-[10px] right-[20px] text-[19px] text-[#E2A3B7] font-semibold cursor-pointer" onClick={()=>setShow(prev=>!prev)}>{`${show?"hidden":"show"}`}</span>
             </div>
 
-            <button className="px-[20px] py-[10px] bg-[#E2A3B7] rounded-2xl shadow-lg shadow-gray-400 text-[#553D44] text-[20px] w-[200px] mt-[20px] font-semibold hover:shadow-inner">sign up</button>
+            <button className="px-[20px] py-[10px] bg-[#E2A3B7] rounded-2xl shadow-lg shadow-gray-400 text-[#553D44] text-[20px] w-[200px] mt-[20px] font-semibold hover:shadow-inner">login</button>
             <p className='cursor-pointer' onClick={()=>navigate("/signup")}>Want to create an account? <span className="text-[#E2A3B7] font-bold">Sign up</span>
             </p>
    </form>
