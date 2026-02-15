@@ -18,3 +18,5 @@ const isAuth=async(res,req,next)=>{
 
     }
 }
+
+export default isAuth
