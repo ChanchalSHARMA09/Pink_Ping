@@ -67,17 +67,17 @@ export const signIn= async(req,res)=>{
 
         const isMatch=await bcrypt.compare(password,user.password);
         if(!isMatch){
-            res.status(400).json({message:`password invalid`});
+            return res.status(400).json({message:`password invalid`});
         }
 
 
 
-        const token=await genToken(User._id);
+        const token=await genToken(user._id);
         
         res.cookie("token",token,{
             httpOnly:true,
             maxAge:7*24*60*60*1000,
-            samSite:"none",
+            sameSite:"none",
             secure:false,
         });
         

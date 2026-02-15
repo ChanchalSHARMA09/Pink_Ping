@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { serverUrl } from '../main';
+
 
 function SignUp() {
   let navigate=useNavigate();
@@ -10,16 +12,28 @@ let [userName,setUserName]=useState("")
 let [email,setEmail]=useState("")
 let [password,setPassword]=useState("")
 
+
+
+const [loading, setLoading] = useState(false);
+   let [err,setErr]=useState("")
+
 const handleSignUp=async (e)=>{
   e.preventDefault()
+  setLoading(true)
   try{
     let result=await axios.post(`${serverUrl}/api/auth/signup`,{
 userName,email,password
     },{withCredentials:true})
     console.log(result)
+    setEmail("")
+    setPassword("")
+     setLoading(false)
+     setErr("")
 
   }catch(error){
     console.log(error)
+     setLoading(false)
+     setErr(error?.response?.data?.message)
 
   }
 }
@@ -32,7 +46,7 @@ userName,email,password
 
          <h1 className="text-gray-600 font-bold text-[30px] text-center">Welcome to <span className="text-white">PinkPing</span>...</h1>
         </div>
-   <form className="w-full flex flex-col gap-[20px] items-center">
+   <form className="w-full flex flex-col gap-[20px] items-center" onSubmit={handleSignUp}>
     <input type="text" placeholder='username' className="w-[90%] h-[50px] outline-none border-2 border-[#E2A3B7] px-[20px] py-[10px] bg-[white]rounded-lg shadow-lg shadow-gray-200 text-gray-700 text-[19px]" onChange={(e)=>setUserName(e.target.value)} value={userName}/>
 
         <input type="email" placeholder='email' className="w-[90%] h-[50px] outline-none  border-2 border-[#E2A3B7] px-[20px] py-[10px] bg-white rounded-lg shadow-lg shadow-gray-200 text-gray-700 text-[19px]" onChange={(e)=>setEmail(e.target.value)} value={email}/>
@@ -42,7 +56,9 @@ userName,email,password
                <span className="absolute top-[10px] right-[20px] text-[19px] text-[#E2A3B7] font-semibold cursor-pointer" onClick={()=>setShow(prev=>!prev)}>{`${show?"hidden":"show"}`}</span>
             </div>
 
-            <button className="px-[20px] py-[10px] bg-[#E2A3B7] rounded-2xl shadow-lg shadow-gray-400 text-[#553D44] text-[20px] w-[200px] mt-[20px] font-semibold hover:shadow-inner" onSubmit={handleSignUp}>sign up</button>
+{err && <p className="text-red-500">{"*"+err}</p>}
+
+            <button type="submit" className="px-[20px] py-[10px] bg-[#E2A3B7] rounded-2xl shadow-lg shadow-gray-400 text-[#553D44] text-[20px] w-[200px] mt-[20px] font-semibold hover:shadow-inner" disabled={loading}>{loading?"loading...":"sign up"}</button>
             <p className='cursor-pointer' onClick={()=>navigate("/login")}>Already have an account? <span className="text-[#E2A3B7] font-bold">Login</span>
             </p>
    </form>
