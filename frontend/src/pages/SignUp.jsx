@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { serverUrl } from '../main';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserData } from '../redux/userSlice';
 
 
 function SignUp() {
@@ -14,8 +16,11 @@ let [password,setPassword]=useState("")
 
 
 
-const [loading, setLoading] = useState(false);
+let [loading, setLoading] = useState(false);
    let [err,setErr]=useState("")
+   let dispatch=useDispatch()
+   let {userData}=useSelector(state=>state.user)
+   console.log(userData)
 
 const handleSignUp=async (e)=>{
   e.preventDefault()
@@ -24,7 +29,9 @@ const handleSignUp=async (e)=>{
     let result=await axios.post(`${serverUrl}/api/auth/signup`,{
 userName,email,password
     },{withCredentials:true})
-    console.log(result)
+    
+    dispatch(setUserData(result.data))
+
     setEmail("")
     setPassword("")
      setLoading(false)
@@ -47,7 +54,7 @@ userName,email,password
          <h1 className="text-gray-600 font-bold text-[30px] text-center">Welcome to <span className="text-white">PinkPing</span>...</h1>
         </div>
    <form className="w-full flex flex-col gap-[20px] items-center" onSubmit={handleSignUp}>
-    <input type="text" placeholder='username' className="w-[90%] h-[50px] outline-none border-2 border-[#E2A3B7] px-[20px] py-[10px] bg-[white]rounded-lg shadow-lg shadow-gray-200 text-gray-700 text-[19px]" onChange={(e)=>setUserName(e.target.value)} value={userName}/>
+    <input type="text" placeholder='username' className="w-[90%] h-[50px] outline-none border-2 border-[#E2A3B7] px-[20px] py-[10px] bg-[white] rounded-lg shadow-lg shadow-gray-200 text-gray-700 text-[19px]" onChange={(e)=>setUserName(e.target.value)} value={userName}/>
 
         <input type="email" placeholder='email' className="w-[90%] h-[50px] outline-none  border-2 border-[#E2A3B7] px-[20px] py-[10px] bg-white rounded-lg shadow-lg shadow-gray-200 text-gray-700 text-[19px]" onChange={(e)=>setEmail(e.target.value)} value={email}/>
 

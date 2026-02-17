@@ -10,7 +10,7 @@ function Login() {
   let [email,setEmail]=useState("")
   let [password,setPassword]=useState("")
  
-  const [loading, setLoading] = useState(false);
+  let [loading, setLoading] = useState(false);
    let [err,setErr]=useState("")
 
 
